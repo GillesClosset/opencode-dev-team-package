@@ -1,0 +1,164 @@
+# Customization Guide
+
+How to extend the WISC package for your project.
+
+---
+
+## Creating Zone-Specific Prime Commands
+
+Prime commands orient the agent on a specific part of the codebase before
+starting work. The default `/prime` covers the whole project; zone-specific
+variants go deeper.
+
+1. Copy an example from `examples/prime-commands/`:
+   ```bash
+   cp /path/to/wisc-opencode/examples/prime-commands/prime-backend.md .opencode/commands/
+   ```
+
+2. Edit the file to match your project's structure:
+   - Replace `{path/to/...}` placeholders with actual paths
+   - Add project-specific entry points and key files
+   - Adjust the output summary to cover what matters in your zone
+
+3. The command will appear as `/prime-backend` in OpenCode
+
+**Naming convention:** `prime-{zone}.md` → `/prime-{zone}`
+
+---
+
+## Creating On-Demand Rules
+
+On-demand rules (L2) capture zone-specific conventions that should load
+only when working in that area.
+
+1. Start from the template:
+   ```bash
+   cp .opencode/rules/_template.md .opencode/rules/{zone}.md
+   ```
+
+2. Fill in each section:
+   - **Conventions:** Patterns and standards for this area
+   - **Key files:** The most important files and what they do
+   - **Testing:** How to test changes, specific commands, gotchas
+   - **Anti-patterns:** What to avoid
+
+3. Reference from AGENTS.md:
+   ```markdown
+   ## On-Demand Rules
+   Zone rules are in `.opencode/rules/`. Load the relevant file when
+   entering a specific area.
+   ```
+
+**One file per zone.** Keep each under 300 lines. If a rule file grows too
+large, the zone is probably too broad — split it.
+
+---
+
+## Creating Reference Docs
+
+Reference docs (L3) are heavy documentation that loads via scout assessment.
+
+1. Start from the template:
+   ```bash
+   cp .opencode/docs/_template.md .opencode/docs/{topic}.md
+   ```
+
+2. **Always include the 3-line scout header:**
+   ```markdown
+   > **Purpose:** {1 sentence — what this document covers}
+   > **When to use:** {1 sentence — what kind of work makes this doc relevant}
+   > **Size:** ~{N} lines — use the scout agent to check relevance before loading.
+   ```
+
+3. Write the full document content below the header.
+
+**The scout header is critical.** Without it, the scout agent cannot assess
+relevance, and the document will either be loaded speculatively (wasting
+context) or never loaded (wasting the documentation effort).
+
+---
+
+## Customizing Commands
+
+Each command in `.opencode/commands/` can be modified for your project.
+Common customizations:
+
+### `/commit`
+- Add project-specific scope conventions:
+  ```
+  Scopes for this project: api, ui, db, auth, ci, docs
+  ```
+- Add ticket reference conventions:
+  ```
+  Always include the Jira ticket: feat(api): add rate limiting [PROJ-123]
+  ```
+
+### `/plan`
+- Add project-specific research areas for Phase 2:
+  ```
+  Scout E — Check the migration history for schema changes related to this feature
+  ```
+- Add project-specific constraints for Phase 4
+
+### `/execute`
+- Add project-specific validation commands:
+  ```
+  After each task group: npm run type-check && npm run lint
+  Full validation: npm run validate
+  ```
+
+### `/prime`
+- Add project-specific entry points and structure
+- Add checks for project-specific state (e.g., Docker containers, env files)
+
+---
+
+## Creating New Commands
+
+Any `.md` file in `.opencode/commands/` becomes a slash command. The filename
+(without `.md`) becomes the command name.
+
+**Common additions:**
+
+### `/review` — Trigger a QA review
+```yaml
+---
+description: Review current changes for quality and risk
+agent: qa-review
+---
+```
+
+### `/test` — Run focused tests
+```yaml
+---
+description: Run tests for a specific area
+---
+```
+
+### `/deploy` — Deployment checklist
+```yaml
+---
+description: Pre-deployment checklist and verification
+---
+```
+
+**Frontmatter options:**
+- `description:` — Shown in the command list (required)
+- `agent:` — Auto-routes to a specific agent (optional)
+
+---
+
+## Customizing Agents
+
+Agent files in `.opencode/agents/` can be modified to better fit your project.
+Common customizations:
+
+- Add project-specific safety rules to Cody
+- Add domain knowledge to discovery-architect
+- Adjust QA review criteria for your risk tolerance
+- Add specialized knowledge areas to the scout agent
+
+**Caution:** Keep agent changes minimal. The agents are designed to be
+generic and derive project-specific behavior from AGENTS.md and on-demand
+rules. If you find yourself adding lots of project-specific content to an
+agent, it probably belongs in a rule file instead.

@@ -1,0 +1,80 @@
+package:
+  name: wisc-opencode
+  version: 1.0.0
+  description: >-
+    WISC context engineering framework for OpenCode.
+    Write, Isolate, Select, Compress — manage AI agent context
+    to prevent context rot and maintain reliability.
+  framework: WISC
+  target: opencode
+
+artifacts:
+  commands:
+    - path: commands/commit.md
+      installs_to: .opencode/commands/commit.md
+      wisc_pillar: write
+    - path: commands/plan.md
+      installs_to: .opencode/commands/plan.md
+      wisc_pillar: write
+    - path: commands/execute.md
+      installs_to: .opencode/commands/execute.md
+      wisc_pillar: write
+    - path: commands/handoff.md
+      installs_to: .opencode/commands/handoff.md
+      wisc_pillar: write+compress
+    - path: commands/prime.md
+      installs_to: .opencode/commands/prime.md
+      wisc_pillar: select
+
+  agents:
+    - path: agents/cody.md
+      installs_to: .opencode/agents/cody.md
+      role: delivery
+    - path: agents/discovery-architect.md
+      installs_to: .opencode/agents/discovery-architect.md
+      role: discovery
+    - path: agents/qa-review.md
+      installs_to: .opencode/agents/qa-review.md
+      role: review
+    - path: agents/scout.md
+      installs_to: .opencode/agents/scout.md
+      role: research
+      wisc_pillar: isolate
+
+  scaffold:
+    - path: scaffold/rules/_template.md
+      installs_to: .opencode/rules/_template.md
+      wisc_pillar: select
+    - path: scaffold/docs/_template.md
+      installs_to: .opencode/docs/_template.md
+      wisc_pillar: select
+    - path: scaffold/plans/
+      installs_to: .opencode/plans/
+      wisc_pillar: write
+    - path: scaffold/backlog/
+      installs_to: .opencode/backlog/
+    - path: scaffold/handoffs/
+      installs_to: .opencode/handoffs/
+      wisc_pillar: write+compress
+
+  templates:
+    - path: templates/backlog/story.md
+      purpose: Story contract between discovery and delivery
+
+  examples:
+    - path: examples/rules/
+      purpose: Example on-demand rule files (L2)
+    - path: examples/docs/
+      purpose: Example scout-compatible reference docs (L3)
+    - path: examples/prime-commands/
+      purpose: Example zone-specific prime commands (L4)
+    - path: examples/agents-md-example.md
+      purpose: Example lean AGENTS.md (L1)
+
+  docs:
+    - path: docs/wisc-overview.md
+    - path: docs/installation.md
+    - path: docs/context-layers.md
+    - path: docs/daily-workflow.md
+    - path: docs/onboarding-existing-project.md
+    - path: docs/customization.md
