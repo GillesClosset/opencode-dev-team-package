@@ -23,7 +23,7 @@ under 100 lines. Commits capture WHY, not just what.
 ```
 wisc-opencode/
 ├── commands/           # 5 slash commands — the WISC engine
-├── agents/             # 4 specialized agents
+├── agents/             # 5 agents (1 orchestrator + 4 specialists)
 ├── scaffold/           # Directory templates for .opencode/
 ├── examples/           # Example rules, docs, prime commands, AGENTS.md
 ├── docs/               # Framework documentation
@@ -60,6 +60,7 @@ See [docs/installation.md](docs/installation.md) for the full guide.
 
 | Agent | Role |
 |-------|------|
+| **Main** | Orchestrator — owns user conversation, drives WISC cycle, delegates to specialists |
 | **Scout** | Lightweight research — explores codebase, returns concise summaries |
 | **Cody** | Technical delivery — implements bounded lots with minimal safe changes |
 | **Discovery-architect** | Scoping specialist — reduces uncertainty, defines executable lots |

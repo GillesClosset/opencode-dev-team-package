@@ -27,6 +27,9 @@ artifacts:
       wisc_pillar: select
 
   agents:
+    - path: agents/main.md
+      installs_to: .opencode/agents/main.md
+      role: orchestrator
     - path: agents/cody.md
       installs_to: .opencode/agents/cody.md
       role: delivery
