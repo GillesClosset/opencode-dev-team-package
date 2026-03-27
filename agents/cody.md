@@ -123,9 +123,34 @@ Next action: <one concrete step>
 
 Return this block to the main agent so it can persist it if needed.
 
-## Available skills
+## External documentation — Context7
 
-Use whatever skills are available in the current OpenCode environment.
-If you need to look up external documentation for a library or API,
-check if a documentation lookup skill is available before relying on
-memory alone.
+**Never rely on training-data memory for library versions or API signatures.**
+Training data is stale. Use Context7 to get current documentation before
+writing any version-sensitive code.
+
+### When you MUST look up current docs
+
+- Writing or updating dependency files (`requirements.txt`, `pyproject.toml`,
+  `package.json`, `Cargo.toml`, `go.mod`, etc.) — always verify the current
+  stable version before pinning
+- Using an SDK, client library, or framework API — verify method signatures
+  and options against current docs
+- Any import or usage you are not 100% certain is still current
+
+### How to use Context7
+
+**Via MCP tools** (preferred when available in the session):
+```
+context7_resolve-library-id  →  context7_query-docs
+```
+
+**Via CLI** (bash fallback):
+```bash
+ctx7 get <library>           # e.g. ctx7 get fastapi
+ctx7 get "pydantic v2"
+ctx7 get "langchain python"
+```
+
+Look up first, write second. If Context7 is unavailable, state that
+explicitly rather than guessing versions from memory.

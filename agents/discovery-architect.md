@@ -88,8 +88,28 @@ in parallel:
 Synthesize findings: current state, gaps, constraints.
 
 ### Phase 3: External Research (if needed)
-If the feature involves external APIs, new libraries, or unfamiliar
-patterns, use documentation lookup skills or web research.
+If the feature involves external APIs, new libraries, unfamiliar patterns,
+or any version-sensitive dependency, **use Context7** — not training-data
+memory. Training data is stale; Context7 returns current documentation.
+
+**Via MCP tools** (preferred when available):
+```
+context7_resolve-library-id  →  context7_query-docs
+```
+
+**Via CLI** (bash fallback):
+```bash
+ctx7 get <library>           # e.g. ctx7 get fastapi
+ctx7 get "pydantic v2"
+```
+
+Specifically use Context7 when:
+- The plan will reference a specific library version (pin it from current docs)
+- An API method signature matters for the lot boundary definition
+- The library is under active development and conventions may have shifted
+
+If Context7 is unavailable, flag this explicitly in the plan as a risk
+rather than citing versions or API shapes from memory.
 
 ### Phase 4: Strategic Thinking
 Before writing tasks, reason through: where does the logic belong,
@@ -167,9 +187,20 @@ rather than producing a partial recommendation.
 
 An execution agent should be able to implement the recommended lot without redoing discovery.
 
-## Available skills
+## External documentation — Context7
 
-Use whatever skills are available in the current OpenCode environment.
-If you need to look up external documentation for a library or API,
-check if a documentation lookup skill is available before relying on
-memory alone.
+**Never cite library versions or API signatures from memory.** Use Context7
+to retrieve current documentation during discovery.
+
+**Via MCP tools** (preferred when available):
+```
+context7_resolve-library-id  →  context7_query-docs
+```
+
+**Via CLI** (bash fallback):
+```bash
+ctx7 get <library>
+```
+
+This is mandatory when the plan specifies any dependency version or external
+API contract. If Context7 is unavailable, note it as a risk in the plan.

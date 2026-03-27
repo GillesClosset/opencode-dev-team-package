@@ -89,8 +89,65 @@ If you want commands and agents available across all projects:
 
 ```bash
 cp -r /path/to/wisc-opencode/commands/ ~/.config/opencode/commands/
-cp -r /path/to/wisc-opencode/agents/ ~/.config/opencode/agents/
+cp -r /path/to/wisc-opencode/agents/ ~/.config/opencode/agent/
 ```
 
 Global installation means the commands work everywhere, but zone-specific
 rules and reference docs still live in each project's `.opencode/` directory.
+
+## Optional: External Documentation (Context7)
+
+Context7 gives agents access to **current, version-accurate library and API
+documentation** at query time. Without it, agents fall back on training data
+which is often months or years out of date — leading to plans with stale
+package versions, deprecated APIs, or wrong call signatures.
+
+### MCP server (recommended for OpenCode)
+
+Add to `~/.config/opencode/opencode.json` under the `"mcp"` key:
+
+```json
+"context7": {
+  "type": "remote",
+  "url": "https://mcp.context7.com/mcp",
+  "headers": {
+    "CONTEXT7_API_KEY": "<your-api-key>"
+  },
+  "enabled": true
+}
+```
+
+Get a free API key at [context7.com](https://context7.com). With the MCP
+server configured, agents can resolve and query library documentation
+directly through the `context7_resolve-library-id` and
+`context7_query-docs` MCP tools — no extra commands needed.
+
+### ctx7 CLI (alternative / bash fallback)
+
+Install the CLI globally:
+
+```bash
+npm install -g context7-cli
+```
+
+Usage inside agent bash steps:
+
+```bash
+ctx7 get fastapi
+ctx7 get "langchain python"
+ctx7 get "pydantic v2"
+```
+
+The CLI is useful when an agent needs to resolve package versions in a bash
+step (e.g., inside `/execute` or a scout research pass) without relying on
+MCP tool availability.
+
+### When to use each
+
+| Situation | Use |
+|-----------|-----|
+| OpenCode session with MCP configured | Context7 MCP tools (automatic) |
+| Agent writing a `requirements.txt`, `package.json`, or `pyproject.toml` | **Always** look up current version first |
+| Scout researching an unfamiliar library | `ctx7 get <library>` in a bash step |
+| Discovery-architect Phase 3 external research | Context7 MCP or `ctx7 get` |
+| Any version-sensitive API or SDK usage | Look up before writing, not after |

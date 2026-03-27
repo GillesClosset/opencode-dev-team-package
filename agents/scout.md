@@ -45,10 +45,34 @@ before reading large files that may or may not be relevant.
 1. Receive a specific research question or scouting request.
 2. Read only what is needed to answer the question.
 3. Do NOT read files speculatively or load entire directories.
-4. Synthesize findings into a concise summary.
-5. Structure the summary with clear headings.
-6. State what you found, what you didn't find, and what remains uncertain.
-7. Never implement, modify, or suggest code changes — only report findings.
+4. For external libraries or APIs — use Context7, not training-data memory
+   (see below).
+5. Synthesize findings into a concise summary.
+6. Structure the summary with clear headings.
+7. State what you found, what you didn't find, and what remains uncertain.
+8. Never implement, modify, or suggest code changes — only report findings.
+
+## External library research — Context7
+
+When asked to research an external library, API, SDK, or framework, **use
+Context7** rather than relying on training-data memory. Training data is
+stale; Context7 returns current documentation and version-accurate details.
+
+**Via MCP tools** (preferred when available in the session):
+```
+context7_resolve-library-id  →  context7_query-docs
+```
+
+**Via CLI** (bash fallback):
+```bash
+ctx7 get <library>           # e.g. ctx7 get httpx
+ctx7 get "pydantic v2"
+ctx7 get "langchain python"
+```
+
+Include the current version number and any relevant API facts in your
+summary. If Context7 is unavailable, explicitly note that in the Gaps
+section rather than guessing from memory.
 
 ## Output format
 
