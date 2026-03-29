@@ -7,10 +7,16 @@ agent: discovery-architect
 
 ## Objective
 
-Produce a detailed, actionable implementation plan for: **$ARGUMENTS**
+Produce the planning artifacts for: **$ARGUMENTS**
 
-The plan will be saved to `.opencode/plans/{kebab-case-name}.md` and is designed to be
-consumed by the `/execute` command.
+For non-trivial work, `/plan` must produce two linked outputs:
+
+1. a detailed implementation plan saved to `.opencode/plans/{kebab-case-name}.md`
+2. a refined backlog story saved to
+   `.opencode/backlog/refined/{story-id}-{kebab-case-name}.md`
+
+The plan captures execution detail. The refined story is the durable lot contract
+handed to `/execute`, and it must reference the companion plan path explicitly.
 
 ---
 
@@ -89,11 +95,13 @@ Before writing tasks, reason through:
 - Are changes reversible?
 
 **Project conventions:**
-- Flag any project-specific anti-patterns from AGENTS.md.
+- Flag any project-specific anti-patterns from AGENTS.md when one exists.
+- If no root `AGENTS.md` exists, note the repo-local validation or workflow
+  conventions that will govern execution instead of inventing AGENTS-only rules.
 
 ---
 
-## Phase 5: Plan Generation
+## Phase 5: Artifact Generation
 
 Generate the implementation plan at `.opencode/plans/{kebab-case-feature-name}.md`:
 
@@ -132,6 +140,15 @@ Generate the implementation plan at `.opencode/plans/{kebab-case-feature-name}.m
 {How to safely revert if needed.}
 ```
 
+Also generate the refined story at
+`.opencode/backlog/refined/{story-id}-{kebab-case-feature-name}.md` using the
+story template. The story must:
+
+- keep status set to `refined` when the lot is ready for implementation,
+- reference the companion plan path explicitly,
+- match the same scope, acceptance criteria, and file-touch expectations as the plan,
+- be concise enough for Cody or the main agent to hand off without redoing discovery.
+
 ### Task Ordering Rules
 - Order by dependency (blocked tasks come after their dependencies).
 - Group by area when possible to minimize context switching.
@@ -145,6 +162,9 @@ Generate the implementation plan at `.opencode/plans/{kebab-case-feature-name}.m
 ## Output
 
 1. Save the plan file to `.opencode/plans/{kebab-case-name}.md`
-2. Print the plan to the conversation
-3. Summarize: number of tasks, affected areas, estimated complexity (low/medium/high),
+2. Save the refined story to
+   `.opencode/backlog/refined/{story-id}-{kebab-case-name}.md`
+3. Ensure each artifact references the other clearly enough for execution handoff
+4. Print the plan and the refined story to the conversation
+5. Summarize: number of tasks, affected areas, estimated complexity (low/medium/high),
    and any risks or open questions that need resolution before execution.

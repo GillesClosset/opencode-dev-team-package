@@ -21,6 +21,12 @@ One-line description of what gets built or fixed.
 
 One or two sentences. What problem does this solve, and for whom?
 
+## Companion plan
+
+Path to the detailed implementation plan for this lot.
+
+`.opencode/plans/{kebab-case-name}.md`
+
 ## Lot boundary
 
 Explicit list of what is in scope and what is explicitly out of scope.
@@ -60,7 +66,7 @@ accuracy is critical, note that external docs should be consulted before impleme
 
 ## Status
 
-`draft` | `refined` | `in-progress` | `done` | `blocked`
+`draft` | `refined` | `active` | `done` | `blocked`
 
 Set to `refined` once the discovery specialist has validated that the acceptance
 criteria are testable and the lot boundary is explicit enough for Cody to act on.
@@ -68,3 +74,4 @@ criteria are testable and the lot boundary is explicit enough for Cody to act on
 ## Notes
 
 Any additional context, links, or prior decisions relevant to this story.
+Use this section for short execution handoff notes only — not a duplicate plan.

@@ -86,8 +86,8 @@ installation steps in `docs/installation.md`, then validate each agent:
    conventions, and does not touch unrelated files.
 
 4. **Discovery-architect fourth.** Give it a fuzzy problem. Verify it produces a
-   bounded plan or story and escalates when the problem is unclear rather than
-   guessing.
+   bounded plan plus a refined story for execution handoff, and escalates when
+   the problem is unclear rather than guessing.
 
 5. **QA specialist last.** Ask it to review a small recent change. Verify it returns
    a structured verdict and distinguishes real defects from preferences.
@@ -116,11 +116,15 @@ your-project/
 
 **How it works in practice:**
 
-1. Discovery session ends → discovery-architect writes a story using the
-   story template and saves it to `.opencode/backlog/refined/`.
-2. Main agent hands off to Cody by pointing at that file.
-3. Cody reads the story, implements the lot, and marks the story status as `done`.
-4. Main agent moves the file to `.opencode/backlog/done/` after merge.
+1. Discovery session ends → discovery-architect writes a detailed plan to
+   `.opencode/plans/` and a refined story using the story template to
+   `.opencode/backlog/refined/`.
+2. The refined story references its companion plan path explicitly.
+3. Main agent hands off to Cody by pointing at the refined story (preferred) or
+   the plan directly when needed.
+4. During execution, the lot lifecycle is `refined` → `active` → `done` or
+   `blocked`, according to your repository workflow.
+5. After merge, main agent archives or moves the story into `.opencode/backlog/done/`.
 
 The story file survives session restarts. If the session is interrupted mid-delivery,
 the next session picks up from the file — not from a reconstructed verbal summary.
@@ -137,8 +141,10 @@ task that is small and low-risk: a documentation fix, a small refactor, a minor 
 1. Run `/prime` to verify the scout agent works and produces a useful summary.
 2. Describe the task to the main agent.
 3. Main agent delegates to discovery-architect.
-4. Discovery-architect produces a plan or story in `.opencode/backlog/refined/`.
-5. Main agent delegates to Cody with the plan/story file as input.
+4. Discovery-architect produces a plan in `.opencode/plans/` and a refined story
+   in `.opencode/backlog/refined/`.
+5. Main agent delegates to Cody with the refined story as input, or the plan if
+   the story is not the best handoff artifact for that repo.
 6. Cody implements, produces a commit, returns a structured report.
 7. If risk warrants it, main agent delegates to QA specialist.
 8. Main agent synthesizes back to you: what changed, what risk remains, next step.
@@ -164,8 +170,8 @@ the actual test commands.
 
 **Skipping the backlog folder.**
 Without it, stories are passed as inline prompt text. They disappear at session
-end. A blocked lot has no recovery point. The backlog folder is cheap to create
-and expensive to skip.
+end. A blocked lot has no recovery point, and the story/plan pair loses its
+durable handoff path. The backlog folder is cheap to create and expensive to skip.
 
 **No on-demand rules created.**
 Everything stays in AGENTS.md, which grows past 500 lines and becomes a

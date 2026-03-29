@@ -1,22 +1,35 @@
 ---
-description: Execute an implementation plan file step by step
+description: Execute a plan or refined story step by step
 agent: cody
 ---
 
-# Execute: Implement a Plan
+# Execute: Implement a Plan or Refined Story
 
 ## Objective
 
-Read and execute every task in the plan file: **$ARGUMENTS**
+Read and execute every task described by: **$ARGUMENTS**
+
+`$ARGUMENTS` may be either:
+- a plan file in `.opencode/plans/`, or
+- a refined story in `.opencode/backlog/refined/` that references its companion plan.
 
 Implement all tasks faithfully, following project conventions, and report results.
 
 ---
 
-## Step 1: Read the Entire Plan
+## Step 1: Read the Entire Input Artifact
 
-Read the plan file at `$ARGUMENTS` from start to finish before writing a single line of code.
-Understand:
+Read the input artifact at `$ARGUMENTS` from start to finish before writing a single
+line of code.
+
+If `$ARGUMENTS` is a refined story:
+1. Read the full story first.
+2. Locate the companion plan reference inside the story.
+3. Read that full plan before making changes.
+4. If the story does not name a plan, or the reference is ambiguous, stop and
+   report the missing contract instead of guessing.
+
+Once the plan is identified, understand:
 
 - All tasks and their dependencies
 - Affected areas and files
@@ -65,12 +78,16 @@ If AGENTS.md specifies project conventions (import style, error handling,
 logging), follow them. If not, use standard practices for the project's
 language and framework.
 
+If execution started from a refined story, keep the story lot boundary as the
+scope guard. Do not broaden the work beyond the story and companion plan.
+
 ---
 
 ## Step 4: Run Incremental Validation
 
 After completing a group of related tasks, run the project's incremental
-validation commands. Check AGENTS.md for the specific commands. Common patterns:
+validation commands. Check AGENTS.md for the specific commands. If AGENTS.md is
+absent, use the repo-local validation steps named in the plan. Common patterns:
 type checking, linting, formatting, unit tests for the affected area.
 
 Fix any failures before proceeding to the next task group.
@@ -80,7 +97,8 @@ Fix any failures before proceeding to the next task group.
 ## Step 5: Run Full Validation
 
 After all tasks are complete, run the project's full validation suite as
-specified in AGENTS.md.
+specified in AGENTS.md. If AGENTS.md is absent, run the full validation named in
+the plan or the closest repo-local equivalent.
 
 All checks must pass. If any fail, fix them before reporting completion.
 

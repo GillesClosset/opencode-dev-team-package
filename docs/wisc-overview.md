@@ -69,8 +69,8 @@ a scout agent to keep the main context clean.
 ## The Daily Workflow
 
 1. **Prime** — `/prime` to orient on the current project state
-2. **Plan** — `/plan {feature}` to create a structured implementation plan
-3. **Execute** — `/execute {plan-file}` to implement the plan step by step
+2. **Plan** — `/plan {feature}` to create a detailed plan plus a refined story
+3. **Execute** — `/execute {story-file}` or `/execute {plan-file}` to implement the lot step by step
 4. **Commit** — `/commit` to create an enriched commit with context
 5. **Handoff** — `/handoff` to capture session state for continuation
 

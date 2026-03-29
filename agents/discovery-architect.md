@@ -115,7 +115,7 @@ rather than citing versions or API shapes from memory.
 Before writing tasks, reason through: where does the logic belong,
 dependency direction, test isolation, rollback plan.
 
-### Phase 5: Plan Generation
+### Phase 5: Artifact Generation
 Save the plan to `.opencode/plans/{kebab-case-name}.md` using this format:
 
 ```
@@ -152,12 +152,13 @@ Save the plan to `.opencode/plans/{kebab-case-name}.md` using this format:
 
 ## Output format — produce a story artefact
 
-When discovery is complete and a lot is ready, produce the lot recommendation in the
-structured story format defined in `templates/backlog/story.md`.
+When discovery is complete and a lot is ready, also produce the lot recommendation
+in the structured story format defined in `templates/backlog/story.md`.
 
 Fill in every section:
 - story ID (assign sequentially, e.g. `E01S01`),
 - title, objective, lot boundary,
+- companion plan reference,
 - acceptance criteria (each one independently verifiable),
 - files likely touched,
 - dependencies,
@@ -167,8 +168,17 @@ Set the story status to `refined` only when you are confident the acceptance cri
 are testable and the lot boundary is explicit enough for Cody to act on without
 redoing discovery.
 
-The story is the contract. Cody reads it. The main agent hands it off. Keep it
-precise and actionable. Stories are saved to `.opencode/backlog/`.
+The plan contains execution detail. The refined story is the durable handoff
+contract. When a lot is ready, the story is not optional — save it alongside the
+plan. Keep both artifacts precise and aligned enough that execution does not need
+another discovery pass.
+
+Default storage locations:
+- plan: `.opencode/plans/{kebab-case-name}.md`
+- refined story: `.opencode/backlog/refined/{story-id}-{kebab-case-name}.md`
+
+The refined story must point to its companion plan path explicitly so the main
+agent or Cody can start from either artifact.
 
 ## Session handoff
 

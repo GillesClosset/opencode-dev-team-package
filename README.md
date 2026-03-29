@@ -81,8 +81,8 @@ See [docs/context-layers.md](docs/context-layers.md) for details.
 ## Daily Workflow
 
 1. **Prime** → `/prime` to orient on project state
-2. **Plan** → `/plan {feature}` to create an implementation plan
-3. **Execute** → `/execute {plan-file}` to implement (in fresh context)
+2. **Plan** → `/plan {feature}` to create a plan plus a refined story
+3. **Execute** → `/execute {story-file}` or `/execute {plan-file}` to implement (in fresh context)
 4. **Commit** → `/commit` to create enriched commit with WHY
 5. **Handoff** → `/handoff` to capture state for next session
 

@@ -87,18 +87,25 @@ context and returns a concise project summary. Load the result, check for
 existing handoffs, and confirm direction with the user.
 
 ### 2. Plan (before implementation)
-Use `/plan {feature}` to create a structured implementation plan. This runs
-via Discovery-architect, which uses Scout sub-agents for research. The plan
-is saved to `.opencode/plans/` and becomes the contract for execution.
+Use `/plan {feature}` to create the execution handoff artifacts. This runs
+via Discovery-architect, which uses Scout sub-agents for research. For
+non-trivial work, `/plan` saves:
+- a detailed plan in `.opencode/plans/`
+- a refined story in `.opencode/backlog/refined/`
+
+The plan holds implementation detail. The refined story is the durable lot
+contract for backlog handoff and should reference the companion plan.
 
 **Key rule: Never plan and implement in the same context.** The planning
 phase fills context with research. Start execution in a fresh context
-with only the plan loaded.
+with only the refined story and companion plan loaded.
 
 ### 3. Execute (implementation)
-Use `/execute {plan-file}` to implement the plan. This runs via Cody, who
-reads the plan, follows dependency order, and validates incrementally. Cody
-returns a structured completion report.
+Use `/execute {story-file}` or `/execute {plan-file}` to implement the lot.
+Prefer the refined story when one exists; it is the backlog contract and points
+to the detailed plan. This runs via Cody, who reads the input artifact,
+identifies the companion plan when needed, follows dependency order, and
+validates incrementally. Cody returns a structured completion report.
 
 ### 4. Commit (persist changes)
 Use `/commit` to create an enriched commit. The commit captures WHAT changed
@@ -126,7 +133,7 @@ at the next session start.
 - there is a real risk of unbounded exploration.
 
 ### Use Cody when
-- the lot is explicit and the plan exists,
+- the lot is explicit and a plan exists directly or via a refined story,
 - the expected files or areas are known well enough,
 - the success target can be validated with focused checks,
 - implementation should be minimal and safe.
@@ -202,7 +209,9 @@ Load the relevant skill when the task domain matches — do not load all skills 
 
 **Domain skills** (frontend-ui, api-design, database, security) provide checklists and conventions for design decisions — use them when the lot involves that domain.
 
-When delegating to discovery-architect or cody, note which skills are relevant to the lot so the receiving agent can load them.
+When delegating to discovery-architect or Cody, note which skills are relevant
+to the lot so the receiving agent can load them. When a refined story exists,
+prefer handing that story to Cody and rely on its companion plan for execution detail.
 
 ## Local customization
 
