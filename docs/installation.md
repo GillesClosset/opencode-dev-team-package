@@ -27,6 +27,58 @@ cp /path/to/wisc-opencode/scaffold/docs/_template.md .opencode/docs/
 
 Replace `/path/to/wisc-opencode/` with the actual path to your copy of this package.
 
+## Install Skills
+
+Skills give agents access to specialized domain knowledge and live research capabilities.
+They are loaded on-demand — only when the task matches the skill's trigger condition.
+
+### Project-local install (recommended)
+
+Install skills into the current project only:
+
+```bash
+mkdir -p .agents/skills
+
+# Install all 5 bundled skills
+cp -r /path/to/wisc-opencode/skills/perplexity/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/frontend-ui/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/api-design/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/database/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/security/ .agents/skills/
+
+# Or install only the skills your project needs
+cp -r /path/to/wisc-opencode/skills/security/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/database/ .agents/skills/
+```
+
+### Global install
+
+Install skills for all projects on this machine:
+
+```bash
+mkdir -p ~/.agents/skills
+
+cp -r /path/to/wisc-opencode/skills/perplexity/ ~/.agents/skills/
+cp -r /path/to/wisc-opencode/skills/frontend-ui/ ~/.agents/skills/
+cp -r /path/to/wisc-opencode/skills/api-design/ ~/.agents/skills/
+cp -r /path/to/wisc-opencode/skills/database/ ~/.agents/skills/
+cp -r /path/to/wisc-opencode/skills/security/ ~/.agents/skills/
+```
+
+### Perplexity CLI setup
+
+The `perplexity` skill requires the Perplexity CLI and an API key:
+
+1. Check the current install method at: https://github.com/perplexity-ai/cli
+   (CLI tooling evolves — verify the package name before installing)
+2. Set your API key:
+   ```bash
+   export PERPLEXITY_API_KEY="your-api-key"
+   ```
+   Get your key at: https://www.perplexity.ai/settings/api
+
+The other 4 skills (frontend-ui, api-design, database, security) have no external dependencies — they provide reference checklists and conventions loaded directly into agent context.
+
 ## Write Your AGENTS.md
 
 Use `examples/agents-md-example.md` as a starting point. Copy it to your project
@@ -72,6 +124,11 @@ See `scaffold/docs/_template.md` for the template.
 2. Type `/` — you should see: commit, plan, execute, handoff, prime
 3. Run `/prime` — it should analyze your project and return a summary
 4. The scout, cody, discovery-architect, and qa-review agents should appear
+5. If you installed skills, verify them:
+   ```bash
+   ls .agents/skills/
+   # Should list the skills you installed (e.g., perplexity, security, database)
+   ```
 
 ## Optional: Create Zone-Specific Prime Commands
 

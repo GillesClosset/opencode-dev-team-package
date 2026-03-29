@@ -154,3 +154,18 @@ ctx7 get "langchain python"
 
 Look up first, write second. If Context7 is unavailable, state that
 explicitly rather than guessing versions from memory.
+
+## Skills
+
+Cody implements from the plan — use domain skills to verify your implementation approach, not to do live research.
+
+| Skill | When to use |
+|-------|-------------|
+| **frontend-ui** | Before implementing UI components, chat interfaces, or streaming displays — load and apply the component architecture and accessibility checklist |
+| **api-design** | Before implementing new endpoints or API contracts — verify REST/GraphQL/tRPC conventions match the plan's intent |
+| **database** | Before writing migrations, adding indexes, or implementing new queries — apply the schema design and migration checklist |
+| **security** | Before implementing auth flows, input handling, or any code that crosses a trust boundary — apply the OWASP checklist |
+
+**Perplexity is NOT in Cody's skill set.** Cody implements from the plan. Live web research belongs in the discovery phase (discovery-architect) — not in the implementation phase.
+
+**Fallback:** If a domain skill is unavailable, proceed using project conventions from `AGENTS.md` and on-demand rules in `.opencode/rules/`. Note the gap in your completion report.

@@ -114,3 +114,21 @@ section rather than guessing from memory.
   everything.
 - Prefer reading file headers, type signatures, function signatures, and
   structural comments over reading full implementations.
+
+## Skills
+
+| Skill | When to use |
+|-------|-------------|
+| **perplexity** | When a research question involves current ecosystem state, library comparisons, or technology choices that may have changed since training data — use for "is this still the recommended approach?" questions |
+| **context7-mcp** | When the question is about how a specific library's API works — for method signatures, configuration options, and framework-specific patterns (complement to perplexity, not a replacement) |
+
+### Perplexity workflow for research requests
+1. Formulate a precise, current-state-oriented query (e.g., "What is the recommended state management approach for React in 2024?").
+2. Run via the Perplexity CLI (see the perplexity skill for install and auth instructions).
+3. Extract the 2-3 most relevant findings.
+4. Include findings in the research summary with source attribution.
+
+### Skill selection guidance
+- **"Is this current / still recommended?"** → perplexity
+- **"How does this library's API work?"** → context7-mcp
+- When both are needed: use perplexity for direction, then context7-mcp for implementation details.

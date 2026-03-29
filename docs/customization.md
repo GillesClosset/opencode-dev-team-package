@@ -162,3 +162,73 @@ Common customizations:
 generic and derive project-specific behavior from AGENTS.md and on-demand
 rules. If you find yourself adding lots of project-specific content to an
 agent, it probably belongs in a rule file instead.
+
+---
+
+## Creating New Skills
+
+Skills are `SKILL.md` files that give agents specialized domain knowledge or tool access.
+Unlike rules (project-specific conventions) and docs (passive reference material), skills
+are **active** — the agent follows a workflow or applies a checklist defined in the skill.
+
+### When to create a skill vs. a rule
+
+| | Skills | Rules |
+|-|--------|-------|
+| **Scope** | Reusable across all projects | Project-specific conventions |
+| **Content** | Tool workflows, domain checklists, external service patterns | Coding standards, file structure, testing commands for this project |
+| **Example** | "How to validate inputs using OWASP patterns" | "In this project, all API inputs use Zod schemas in `src/validators/`" |
+
+### When to create a skill vs. a doc
+
+| | Skills | Docs (L3) |
+|-|--------|-----------|
+| **Nature** | Active — agent follows a workflow | Passive — reference material the agent reads |
+| **Usage** | Agent checks a checklist, runs a CLI, applies a pattern | Agent reads to understand architecture or data flows |
+| **Example** | Security skill with OWASP checklist | Architecture deep-dive with system diagrams |
+
+### Install path
+
+Skills install to:
+- Project-local: `.agents/skills/{name}/SKILL.md`
+- Global: `~/.agents/skills/{name}/SKILL.md`
+
+The package ships them under `skills/{name}/SKILL.md`.
+
+### SKILL.md format
+
+Follow this structure:
+
+```markdown
+---
+name: {skill-name}
+description: {one-line trigger description — when should an agent load this skill?}
+---
+
+# {Skill Name} — {Short Tagline}
+
+## When to activate
+
+- {condition 1}
+- {condition 2}
+
+## {Main content section}
+
+{Checklists, workflows, patterns, commands}
+
+## Key questions before implementing
+
+1. {Question that should be answered before using this skill}
+```
+
+**Frontmatter fields:**
+- `name:` — machine-readable identifier (matches directory name)
+- `description:` — shown to agents as the trigger condition; keep it one sentence and action-oriented
+
+### Guidelines
+
+- **Keep skills focused** — one domain or tool per skill file. Don't create a "backend" skill that covers APIs + databases + auth; split those into separate skills.
+- **Include trigger conditions** — the "When to activate" section is critical. Agents use it to decide whether to load the skill.
+- **Prefer checklists over prose** — agents apply checklists reliably; long prose sections get skimmed.
+- **Keep external tool instructions current** — CLI tools evolve. Note where users should verify install instructions rather than hardcoding potentially stale commands.
+- **Size:** aim for 100–300 lines. A skill that exceeds 400 lines is probably covering too much — split it.

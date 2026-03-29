@@ -81,3 +81,20 @@ artifacts:
     - path: docs/daily-workflow.md
     - path: docs/onboarding-existing-project.md
     - path: docs/customization.md
+
+skills:
+  - path: skills/perplexity/SKILL.md
+    installs_to: .agents/skills/perplexity/SKILL.md
+    purpose: Live web research via Perplexity CLI — validate best practices and current ecosystem state
+  - path: skills/frontend-ui/SKILL.md
+    installs_to: .agents/skills/frontend-ui/SKILL.md
+    purpose: UI component patterns and chat/streaming interface design
+  - path: skills/api-design/SKILL.md
+    installs_to: .agents/skills/api-design/SKILL.md
+    purpose: REST, GraphQL, and tRPC API design conventions
+  - path: skills/database/SKILL.md
+    installs_to: .agents/skills/database/SKILL.md
+    purpose: Database schema design, indexing guidelines, and migration best practices
+  - path: skills/security/SKILL.md
+    installs_to: .agents/skills/security/SKILL.md
+    purpose: OWASP patterns, auth best practices, and input validation

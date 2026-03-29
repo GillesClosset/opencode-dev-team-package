@@ -24,6 +24,7 @@ under 100 lines. Commits capture WHY, not just what.
 wisc-opencode/
 ├── commands/           # 5 slash commands — the WISC engine
 ├── agents/             # 5 agents (1 orchestrator + 4 specialists)
+├── skills/             # 5 agent skills (perplexity, frontend-ui, api-design, database, security)
 ├── scaffold/           # Directory templates for .opencode/
 ├── examples/           # Example rules, docs, prime commands, AGENTS.md
 ├── docs/               # Framework documentation
@@ -97,6 +98,30 @@ See [docs/daily-workflow.md](docs/daily-workflow.md) for the full guide.
 - Customize existing commands with project-specific conventions
 
 See [docs/customization.md](docs/customization.md) for details.
+
+## Skills
+
+Skills give agents specialized domain knowledge and live research capabilities.
+Each skill is a `SKILL.md` file loaded on-demand when the task matches the skill's trigger condition.
+
+| Skill | Description | Assigned to |
+|-------|-------------|-------------|
+| **perplexity** | Live web research — validate best practices and current ecosystem state via the Perplexity CLI | main, discovery-architect, scout, qa-review |
+| **frontend-ui** | UI component patterns, chat/streaming interfaces, accessibility checklists | main, discovery-architect, cody |
+| **api-design** | REST, GraphQL, and tRPC conventions, error formats, versioning | main, discovery-architect, cody |
+| **database** | Schema design, indexing guidelines, migration best practices | main, discovery-architect, cody |
+| **security** | OWASP Top 10 checklist, auth patterns, input validation | main, discovery-architect, cody, qa-review |
+
+Install skills into your project:
+```bash
+mkdir -p .agents/skills
+cp -r /path/to/wisc-opencode/skills/security/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/database/ .agents/skills/
+# etc. — install only what your project needs
+```
+
+See [docs/installation.md](docs/installation.md#install-skills) for full install instructions and Perplexity CLI setup.
+See [docs/customization.md](docs/customization.md#creating-new-skills) for how to create your own skills.
 
 ## Documentation
 

@@ -186,6 +186,24 @@ When reporting back on delegated work, cover:
 
 Keep it scannable — bullets over prose.
 
+## Skills
+
+Load the relevant skill when the task domain matches — do not load all skills speculatively.
+
+| Skill | Trigger condition |
+|-------|------------------|
+| **perplexity** | Validating whether an approach is current best practice; comparing libraries; checking security advisories; any "is this still the way?" question before recommending a direction |
+| **frontend-ui** | Designing or reviewing UI components, chat interfaces, streaming UIs, or accessibility decisions |
+| **api-design** | Designing new endpoints, reviewing API contracts, choosing between REST/GraphQL/tRPC, standardizing error responses, versioning decisions |
+| **database** | Designing schemas, adding indexes, writing migrations, query performance questions, data modeling decisions |
+| **security** | Reviewing auth flows, handling user input, building public-facing endpoints, session management, anything crossing a trust boundary |
+
+**Perplexity** answers "is this current?" and "what's the best approach today?" — use it before recommending an architectural direction you are not confident is still current.
+
+**Domain skills** (frontend-ui, api-design, database, security) provide checklists and conventions for design decisions — use them when the lot involves that domain.
+
+When delegating to discovery-architect or cody, note which skills are relevant to the lot so the receiving agent can load them.
+
 ## Local customization
 
 This agent is intentionally generic. Adapt it in the consuming project's

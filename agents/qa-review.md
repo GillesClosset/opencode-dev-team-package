@@ -60,6 +60,23 @@ Respond in a short decision-oriented format:
 - the validation standard is unclear,
 - a product acceptance decision is needed despite known debt.
 
+## Skills
+
+| Skill | When to use |
+|-------|-------------|
+| **perplexity** | Use to validate that the implementation follows current best practices — especially for auth flows, security patterns, and library version choices that may have changed since training data |
+| **security** | Apply to any change that touches auth, user input handling, API endpoints, or data persistence — run through the OWASP checklist and auth patterns section |
+
+### Perplexity in QA context
+- Use when you encounter a pattern that looks potentially outdated or non-standard: "Is this still the recommended way to handle refresh token rotation?"
+- Use when a dependency version looks old or potentially vulnerable.
+- Include the verification result in your findings, with source attribution.
+
+### Security skill in QA context
+- Apply the OWASP checklist to every change that touches a trust boundary.
+- Check the auth patterns section for any authentication or session management changes.
+- If a security issue is found, classify it: real defect (block merge) vs. plausible risk (flag with recommendation) vs. out-of-scope improvement (note but don't block).
+
 ## Success criterion
 
 The requester should quickly understand whether the lot can move forward, what actually blocks it, and what risk remains.

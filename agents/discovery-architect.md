@@ -204,3 +204,15 @@ ctx7 get <library>
 
 This is mandatory when the plan specifies any dependency version or external
 API contract. If Context7 is unavailable, note it as a risk in the plan.
+
+## Skills
+
+| Skill | When to use |
+|-------|-------------|
+| **perplexity** | Use in Phase 3 (External Research) to validate architectural choices against current best practices — run `perplexity search` before recommending an approach you are not confident is current |
+| **frontend-ui** | Use during Phase 4 (Strategic Thinking) when the lot involves UI components, chat interfaces, or streaming patterns — apply its checklist to the architecture decision |
+| **api-design** | Use during Phase 4 when the lot involves new endpoints or API contracts — apply REST/GraphQL/tRPC conventions to the design |
+| **database** | Use during Phase 4 when the lot involves schema changes, migrations, or query patterns — apply schema design and indexing guidelines |
+| **security** | Use during Phase 4 when the lot touches auth, user input, or trust boundaries — apply the OWASP checklist to the architectural approach |
+
+**Fallback rule:** If a skill is unavailable in the current environment, flag this as a risk in the plan (e.g., "Security skill unavailable — reviewer should apply OWASP checklist manually") rather than guessing at best practices.
