@@ -39,12 +39,14 @@ Install skills into the current project only:
 ```bash
 mkdir -p .agents/skills
 
-# Install all 5 bundled skills
+# Install all 7 skills
 cp -r /path/to/wisc-opencode/skills/perplexity/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-ui/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/frontend-design/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/api-design/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/database/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/security/ .agents/skills/
+cp -r /path/to/wisc-opencode/skills/webapp-testing/ .agents/skills/
 
 # Or install only the skills your project needs
 cp -r /path/to/wisc-opencode/skills/security/ .agents/skills/
@@ -60,9 +62,11 @@ mkdir -p ~/.agents/skills
 
 cp -r /path/to/wisc-opencode/skills/perplexity/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-ui/ ~/.agents/skills/
+cp -r /path/to/wisc-opencode/skills/frontend-design/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/api-design/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/database/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/security/ ~/.agents/skills/
+cp -r /path/to/wisc-opencode/skills/webapp-testing/ ~/.agents/skills/
 ```
 
 ### Perplexity CLI setup
@@ -77,7 +81,7 @@ The `perplexity` skill requires the Perplexity CLI and an API key:
    ```
    Get your key at: https://www.perplexity.ai/settings/api
 
-The other 4 skills (frontend-ui, api-design, database, security) have no external dependencies — they provide reference checklists and conventions loaded directly into agent context.
+The other 6 skills provide reference checklists and conventions loaded directly into agent context. `webapp-testing` assumes the target project already has a local Playwright/browser setup when you want to run browser checks, but the skill itself ships only as guidance.
 
 ## Write Your AGENTS.md
 
@@ -127,7 +131,7 @@ See `scaffold/docs/_template.md` for the template.
 5. If you installed skills, verify them:
    ```bash
    ls .agents/skills/
-   # Should list the skills you installed (e.g., perplexity, security, database)
+   # Should list the skills you installed (e.g., frontend-design, webapp-testing, security)
    ```
 
 ## Optional: Create Zone-Specific Prime Commands

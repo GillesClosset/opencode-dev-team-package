@@ -195,6 +195,8 @@ Skills install to:
 
 The package ships them under `skills/{name}/SKILL.md`.
 
+Current bundled catalog: 7 skills — `perplexity`, `frontend-ui`, `frontend-design`, `api-design`, `database`, `security`, and `webapp-testing`.
+
 ### SKILL.md format
 
 Follow this structure:
@@ -228,7 +230,14 @@ description: {one-line trigger description — when should an agent load this sk
 ### Guidelines
 
 - **Keep skills focused** — one domain or tool per skill file. Don't create a "backend" skill that covers APIs + databases + auth; split those into separate skills.
+- **Preserve narrow boundaries** — e.g. use a design skill for aesthetic direction (`frontend-design`) and a separate testing skill for browser validation workflows (`webapp-testing`).
 - **Include trigger conditions** — the "When to activate" section is critical. Agents use it to decide whether to load the skill.
 - **Prefer checklists over prose** — agents apply checklists reliably; long prose sections get skimmed.
 - **Keep external tool instructions current** — CLI tools evolve. Note where users should verify install instructions rather than hardcoding potentially stale commands.
 - **Size:** aim for 100–300 lines. A skill that exceeds 400 lines is probably covering too much — split it.
+
+### Boundary examples
+
+- **Aesthetic direction skill:** focuses on visual hierarchy, typography, color, motion, and how to avoid a generic-looking UI.
+- **Browser testing skill:** focuses on Playwright workflows, locator choice, web-first assertions, waits, and debugging artifacts.
+- **Not a good combined skill:** one file that tries to cover visual design, component architecture, and browser testing together.

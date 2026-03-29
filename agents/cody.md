@@ -170,9 +170,11 @@ Cody implements from the plan — use domain skills to verify your implementatio
 | Skill | When to use |
 |-------|-------------|
 | **frontend-ui** | Before implementing UI components, chat interfaces, or streaming displays — load and apply the component architecture and accessibility checklist |
+| **frontend-design** | Before implementing visually important frontend work — define the visual direction, hierarchy, and anti-generic design guardrails |
 | **api-design** | Before implementing new endpoints or API contracts — verify REST/GraphQL/tRPC conventions match the plan's intent |
 | **database** | Before writing migrations, adding indexes, or implementing new queries — apply the schema design and migration checklist |
 | **security** | Before implementing auth flows, input handling, or any code that crosses a trust boundary — apply the OWASP checklist |
+| **webapp-testing** | Before validating frontend behavior in a browser workflow — apply Playwright-focused guidance for selectors, assertions, waits, and debugging artifacts |
 
 **Perplexity is NOT in Cody's skill set.** Cody implements from the plan. Live web research belongs in the discovery phase (discovery-architect) — not in the implementation phase.
 

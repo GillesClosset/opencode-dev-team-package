@@ -24,7 +24,7 @@ under 100 lines. Commits capture WHY, not just what.
 wisc-opencode/
 ├── commands/           # 5 slash commands — the WISC engine
 ├── agents/             # 5 agents (1 orchestrator + 4 specialists)
-├── skills/             # 5 agent skills (perplexity, frontend-ui, api-design, database, security)
+├── skills/             # 7 agent skills (perplexity, frontend-ui, frontend-design, api-design, database, security, webapp-testing)
 ├── scaffold/           # Directory templates for .opencode/
 ├── examples/           # Example rules, docs, prime commands, AGENTS.md
 ├── docs/               # Framework documentation
@@ -103,14 +103,17 @@ See [docs/customization.md](docs/customization.md) for details.
 
 Skills give agents specialized domain knowledge and live research capabilities.
 Each skill is a `SKILL.md` file loaded on-demand when the task matches the skill's trigger condition.
+This package currently ships **7 skills**.
 
 | Skill | Description | Assigned to |
 |-------|-------------|-------------|
 | **perplexity** | Live web research — validate best practices and current ecosystem state via the Perplexity CLI | main, discovery-architect, scout, qa-review |
 | **frontend-ui** | UI component patterns, chat/streaming interfaces, accessibility checklists | main, discovery-architect, cody |
+| **frontend-design** | Frontend visual direction, typography, color/motion cohesion, anti-generic design guardrails | main, discovery-architect, cody |
 | **api-design** | REST, GraphQL, and tRPC conventions, error formats, versioning | main, discovery-architect, cody |
 | **database** | Schema design, indexing guidelines, migration best practices | main, discovery-architect, cody |
 | **security** | OWASP Top 10 checklist, auth patterns, input validation | main, discovery-architect, cody, qa-review |
+| **webapp-testing** | Playwright-based browser validation workflows for local web apps | main, discovery-architect, cody, qa-review |
 
 Install skills into your project:
 ```bash

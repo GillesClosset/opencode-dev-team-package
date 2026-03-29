@@ -66,6 +66,7 @@ Respond in a short decision-oriented format:
 |-------|-------------|
 | **perplexity** | Use to validate that the implementation follows current best practices — especially for auth flows, security patterns, and library version choices that may have changed since training data |
 | **security** | Apply to any change that touches auth, user input handling, API endpoints, or data persistence — run through the OWASP checklist and auth patterns section |
+| **webapp-testing** | Apply when frontend changes need browser-level verification — review the Playwright-style acceptance checks, selector quality, waits, and failure artifacts |
 
 ### Perplexity in QA context
 - Use when you encounter a pattern that looks potentially outdated or non-standard: "Is this still the recommended way to handle refresh token rotation?"
@@ -76,6 +77,11 @@ Respond in a short decision-oriented format:
 - Apply the OWASP checklist to every change that touches a trust boundary.
 - Check the auth patterns section for any authentication or session management changes.
 - If a security issue is found, classify it: real defect (block merge) vs. plausible risk (flag with recommendation) vs. out-of-scope improvement (note but don't block).
+
+### Webapp-testing skill in QA context
+- Use when a lot changes user-visible frontend behavior and unit tests alone are not enough.
+- Check that browser validation relies on user-facing selectors and web-first assertions rather than blind sleeps.
+- Ask for screenshots, traces, or other debugging artifacts when a browser flow is flaky or hard to verify from code review alone.
 
 ## Success criterion
 

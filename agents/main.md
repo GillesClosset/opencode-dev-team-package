@@ -201,13 +201,15 @@ Load the relevant skill when the task domain matches — do not load all skills 
 |-------|------------------|
 | **perplexity** | Validating whether an approach is current best practice; comparing libraries; checking security advisories; any "is this still the way?" question before recommending a direction |
 | **frontend-ui** | Designing or reviewing UI components, chat interfaces, streaming UIs, or accessibility decisions |
+| **frontend-design** | Defining frontend visual direction, refining product aesthetics, or making a UI feel less generic and more cohesive |
 | **api-design** | Designing new endpoints, reviewing API contracts, choosing between REST/GraphQL/tRPC, standardizing error responses, versioning decisions |
 | **database** | Designing schemas, adding indexes, writing migrations, query performance questions, data modeling decisions |
 | **security** | Reviewing auth flows, handling user input, building public-facing endpoints, session management, anything crossing a trust boundary |
+| **webapp-testing** | Validating browser behavior in a local web app, writing Playwright-style acceptance checks, or debugging user-visible frontend flows |
 
 **Perplexity** answers "is this current?" and "what's the best approach today?" — use it before recommending an architectural direction you are not confident is still current.
 
-**Domain skills** (frontend-ui, api-design, database, security) provide checklists and conventions for design decisions — use them when the lot involves that domain.
+**Domain skills** (frontend-ui, frontend-design, api-design, database, security, webapp-testing) provide checklists and conventions for design, implementation, and validation decisions — use them when the lot involves that domain.
 
 When delegating to discovery-architect or Cody, note which skills are relevant
 to the lot so the receiving agent can load them. When a refined story exists,

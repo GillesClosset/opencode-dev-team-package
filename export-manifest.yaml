@@ -89,6 +89,9 @@ skills:
   - path: skills/frontend-ui/SKILL.md
     installs_to: .agents/skills/frontend-ui/SKILL.md
     purpose: UI component patterns and chat/streaming interface design
+  - path: skills/frontend-design/SKILL.md
+    installs_to: .agents/skills/frontend-design/SKILL.md
+    purpose: Visual direction, aesthetic systems, and anti-generic frontend design guidance
   - path: skills/api-design/SKILL.md
     installs_to: .agents/skills/api-design/SKILL.md
     purpose: REST, GraphQL, and tRPC API design conventions
@@ -98,3 +101,6 @@ skills:
   - path: skills/security/SKILL.md
     installs_to: .agents/skills/security/SKILL.md
     purpose: OWASP patterns, auth best practices, and input validation
+  - path: skills/webapp-testing/SKILL.md
+    installs_to: .agents/skills/webapp-testing/SKILL.md
+    purpose: Playwright-based browser validation workflows for local web apps
