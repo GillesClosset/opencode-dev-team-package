@@ -215,7 +215,7 @@ Add to `~/.config/opencode/opencode.json` under the `"mcp"` key:
 ```json
 "perplexity": {
   "type": "local",
-  "command": ["npx", "-y", "@anthropic/perplexityai-modelcontextprotocol"],
+  "command": ["npx", "-y", "@perplexity-ai/mcp-server"],
   "environment": {
     "PERPLEXITY_API_KEY": "<your-perplexity-api-key>"
   },
@@ -232,7 +232,7 @@ The Perplexity MCP server exposes four tools:
 | Tool | Use when |
 |------|----------|
 | `perplexity_search` | Quick factual lookups — current versions, deprecation status |
-| `perplexity_chat` | Conversational queries — tradeoffs, recommendations |
+| `perplexity_ask` | Conversational queries — tradeoffs, recommendations |
 | `perplexity_research` | Deep analysis — comprehensive comparisons, market research |
 | `perplexity_reason` | Analytical reasoning — cost modeling, decision matrices |
 

@@ -34,14 +34,14 @@ The Perplexity MCP server exposes four tools. Choose the right one for the task:
 | Tool | Model | Use when |
 |------|-------|----------|
 | `perplexity_search` | Search API | Quick factual lookups: "what is the current stable version of X", "is library Y deprecated" |
-| `perplexity_chat` | sonar-pro | Conversational queries: "what are the tradeoffs between approach A and B for this use case" |
+| `perplexity_ask` | sonar-pro | Conversational queries: "what are the tradeoffs between approach A and B for this use case" |
 | `perplexity_research` | sonar-deep-research | Deep analysis: "comprehensive comparison of auth strategies for a multi-tenant SaaS" |
 | `perplexity_reason` | sonar-reasoning-pro | Analytical reasoning: "given these constraints, which architecture minimizes operational cost" |
 
 ### Tool selection guide
 
 1. **Start with `perplexity_search`** for factual questions (versions, deprecation status, quick checks). It's fast and cheap.
-2. **Use `perplexity_chat`** when you need a conversational answer with context — "how should I handle X given Y".
+2. **Use `perplexity_ask`** when you need a conversational answer with context — "how should I handle X given Y".
 3. **Escalate to `perplexity_research`** only for deep-dive questions that justify the cost and latency — comprehensive comparisons, market analysis, multi-factor decisions.
 4. **Use `perplexity_reason`** for structured analytical problems — cost modeling, decision matrices, complex tradeoff analysis.
 
@@ -63,7 +63,7 @@ Good queries are specific and scoped. Bad queries are vague.
 
 1. **Identify the uncertainty** — what exactly are you not confident about?
 2. **Formulate a precise query** — include the technology, version context, and what you need to know
-3. **Choose the right tool** — `perplexity_search` for facts, `perplexity_chat` for nuance, `perplexity_research` for depth
+3. **Choose the right tool** — `perplexity_search` for facts, `perplexity_ask` for nuance, `perplexity_research` for depth
 4. **Extract actionable findings** — pull out the specific answer, version, or recommendation
 5. **Cite in the plan** — note the finding and that it came from web research, so it can be verified
 
@@ -81,7 +81,7 @@ Add the following to your OpenCode config (`opencode.json` or `~/.config/opencod
 ```json
 "perplexity": {
   "type": "local",
-  "command": ["npx", "-y", "@anthropic/perplexityai-modelcontextprotocol"],
+  "command": ["npx", "-y", "@perplexity-ai/mcp-server"],
   "environment": {
     "PERPLEXITY_API_KEY": "<your-perplexity-api-key>"
   },
