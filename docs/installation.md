@@ -39,8 +39,7 @@ Install skills into the current project only:
 ```bash
 mkdir -p .agents/skills
 
-# Install all 7 skills
-cp -r /path/to/wisc-opencode/skills/perplexity/ .agents/skills/
+# Install all 6 skills
 cp -r /path/to/wisc-opencode/skills/frontend-ui/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-design/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/api-design/ .agents/skills/
@@ -60,7 +59,6 @@ Install skills for all projects on this machine:
 ```bash
 mkdir -p ~/.agents/skills
 
-cp -r /path/to/wisc-opencode/skills/perplexity/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-ui/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-design/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/api-design/ ~/.agents/skills/
@@ -69,19 +67,7 @@ cp -r /path/to/wisc-opencode/skills/security/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/webapp-testing/ ~/.agents/skills/
 ```
 
-### Perplexity CLI setup
-
-The `perplexity` skill requires the Perplexity CLI and an API key:
-
-1. Check the current install method at: https://github.com/perplexity-ai/cli
-   (CLI tooling evolves — verify the package name before installing)
-2. Set your API key:
-   ```bash
-   export PERPLEXITY_API_KEY="your-api-key"
-   ```
-   Get your key at: https://www.perplexity.ai/settings/api
-
-The other 6 skills provide reference checklists and conventions loaded directly into agent context. `webapp-testing` assumes the target project already has a local Playwright/browser setup when you want to run browser checks, but the skill itself ships only as guidance.
+All 6 skills provide reference checklists and conventions loaded directly into agent context. `webapp-testing` assumes the target project already has a local Playwright/browser setup when you want to run browser checks, but the skill itself ships only as guidance.
 
 ## Write Your AGENTS.md
 

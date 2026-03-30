@@ -6,7 +6,7 @@ for AI coding agents that prevents context rot and maintains reliability.
 ## What is WISC?
 
 **Write** — Externalize knowledge into persistent files. Plans, handoffs,
-enriched commits, and stories survive across sessions. Git log becomes
+and enriched commits survive across sessions. Git log becomes
 long-term memory.
 
 **Isolate** — Run research in separate agent contexts. A scout reads 50
@@ -24,7 +24,7 @@ under 100 lines. Commits capture WHY, not just what.
 wisc-opencode/
 ├── commands/           # 5 slash commands — the WISC engine
 ├── agents/             # 5 agents (1 orchestrator + 4 specialists)
-├── skills/             # 7 agent skills (perplexity, frontend-ui, frontend-design, api-design, database, security, webapp-testing)
+├── skills/             # 6 agent skills (frontend-ui, frontend-design, api-design, database, security, webapp-testing)
 ├── scaffold/           # Directory templates for .opencode/
 ├── examples/           # Example rules, docs, prime commands, AGENTS.md
 ├── docs/               # Framework documentation
@@ -81,8 +81,8 @@ See [docs/context-layers.md](docs/context-layers.md) for details.
 ## Daily Workflow
 
 1. **Prime** → `/prime` to orient on project state
-2. **Plan** → `/plan {feature}` to create a plan plus a refined story
-3. **Execute** → `/execute {story-file}` or `/execute {plan-file}` to implement (in fresh context)
+2. **Plan** → `/plan {feature}` to create an implementation plan
+3. **Execute** → `/execute {plan-file}` to implement (in fresh context)
 4. **Commit** → `/commit` to create enriched commit with WHY
 5. **Handoff** → `/handoff` to capture state for next session
 
@@ -103,11 +103,10 @@ See [docs/customization.md](docs/customization.md) for details.
 
 Skills give agents specialized domain knowledge and live research capabilities.
 Each skill is a `SKILL.md` file loaded on-demand when the task matches the skill's trigger condition.
-This package currently ships **7 skills**.
+This package currently ships **6 skills**.
 
 | Skill | Description | Assigned to |
 |-------|-------------|-------------|
-| **perplexity** | Live web research — validate best practices and current ecosystem state via the Perplexity CLI | main, discovery-architect, scout, qa-review |
 | **frontend-ui** | UI component patterns, chat/streaming interfaces, accessibility checklists | main, discovery-architect, cody |
 | **frontend-design** | Frontend visual direction, typography, color/motion cohesion, anti-generic design guardrails | main, discovery-architect, cody |
 | **api-design** | REST, GraphQL, and tRPC conventions, error formats, versioning | main, discovery-architect, cody |
@@ -123,7 +122,7 @@ cp -r /path/to/wisc-opencode/skills/database/ .agents/skills/
 # etc. — install only what your project needs
 ```
 
-See [docs/installation.md](docs/installation.md#install-skills) for full install instructions and Perplexity CLI setup.
+See [docs/installation.md](docs/installation.md#install-skills) for full install instructions.
 See [docs/customization.md](docs/customization.md#creating-new-skills) for how to create your own skills.
 
 ## Documentation

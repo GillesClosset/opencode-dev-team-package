@@ -150,35 +150,14 @@ Save the plan to `.opencode/plans/{kebab-case-name}.md` using this format:
 {How to safely revert}
 ```
 
-## Output format — produce a story artefact
+## Output artifact
 
-When discovery is complete and a lot is ready, also produce the lot recommendation
-in the structured story format defined in `templates/backlog/story.md`.
+When discovery is complete and a lot is ready, the plan is the single output
+artifact. Save it to `.opencode/plans/{kebab-case-name}.md` using the template
+from Phase 5 above.
 
-Fill in every section:
-- story ID (assign sequentially, e.g. `E01S01`),
-- title, objective, lot boundary,
-- companion plan reference,
-- acceptance criteria (each one independently verifiable),
-- files likely touched,
-- dependencies,
-- risks and unknowns.
-
-Set the story status to `refined` only when you are confident the acceptance criteria
-are testable and the lot boundary is explicit enough for Cody to act on without
-redoing discovery.
-
-The plan contains execution detail. The refined story is the durable handoff
-contract. When a lot is ready, the story is not optional — save it alongside the
-plan. Keep both artifacts precise and aligned enough that execution does not need
-another discovery pass.
-
-Default storage locations:
-- plan: `.opencode/plans/{kebab-case-name}.md`
-- refined story: `.opencode/backlog/refined/{story-id}-{kebab-case-name}.md`
-
-The refined story must point to its companion plan path explicitly so the main
-agent or Cody can start from either artifact.
+The plan must be precise and self-contained enough that Cody can execute it
+without redoing discovery.
 
 ## Session handoff
 
@@ -219,7 +198,6 @@ API contract. If Context7 is unavailable, note it as a risk in the plan.
 
 | Skill | When to use |
 |-------|-------------|
-| **perplexity** | Use in Phase 3 (External Research) to validate architectural choices against current best practices — run `perplexity search` before recommending an approach you are not confident is current |
 | **frontend-ui** | Use during Phase 4 (Strategic Thinking) when the lot involves UI components, chat interfaces, or streaming patterns — apply its checklist to the architecture decision |
 | **frontend-design** | Use during Phase 4 when the lot needs visual direction, anti-generic design guardrails, or explicit aesthetic decision-making before implementation |
 | **api-design** | Use during Phase 4 when the lot involves new endpoints or API contracts — apply REST/GraphQL/tRPC conventions to the design |

@@ -30,8 +30,8 @@ delivery across sessions.
 
 ## WISC principles — apply constantly
 
-**Write** — Externalize knowledge. Plans, handoffs, enriched commits, and
-stories survive across sessions. Never rely on context memory for critical
+**Write** — Externalize knowledge. Plans, handoffs, and enriched commits
+survive across sessions. Never rely on context memory for critical
 state — persist it.
 
 **Isolate** — Run research in sub-agent contexts. Scout reads 50 files and
@@ -87,25 +87,19 @@ context and returns a concise project summary. Load the result, check for
 existing handoffs, and confirm direction with the user.
 
 ### 2. Plan (before implementation)
-Use `/plan {feature}` to create the execution handoff artifacts. This runs
-via Discovery-architect, which uses Scout sub-agents for research. For
-non-trivial work, `/plan` saves:
-- a detailed plan in `.opencode/plans/`
-- a refined story in `.opencode/backlog/refined/`
-
-The plan holds implementation detail. The refined story is the durable lot
-contract for backlog handoff and should reference the companion plan.
+Use `/plan {feature}` to create the execution plan. This runs via
+Discovery-architect, which uses Scout sub-agents for research. For
+non-trivial work, `/plan` saves a detailed plan in `.opencode/plans/`
+with status, lot boundary, risks, and implementation tasks.
 
 **Key rule: Never plan and implement in the same context.** The planning
 phase fills context with research. Start execution in a fresh context
-with only the refined story and companion plan loaded.
+with only the plan loaded.
 
 ### 3. Execute (implementation)
-Use `/execute {story-file}` or `/execute {plan-file}` to implement the lot.
-Prefer the refined story when one exists; it is the backlog contract and points
-to the detailed plan. This runs via Cody, who reads the input artifact,
-identifies the companion plan when needed, follows dependency order, and
-validates incrementally. Cody returns a structured completion report.
+Use `/execute {plan-file}` to implement the lot. This runs via Cody, who
+reads the plan, follows dependency order, and validates incrementally.
+Cody returns a structured completion report.
 
 ### 4. Commit (persist changes)
 Use `/commit` to create an enriched commit. The commit captures WHAT changed
@@ -133,7 +127,7 @@ at the next session start.
 - there is a real risk of unbounded exploration.
 
 ### Use Cody when
-- the lot is explicit and a plan exists directly or via a refined story,
+- the lot is explicit and a plan exists,
 - the expected files or areas are known well enough,
 - the success target can be validated with focused checks,
 - implementation should be minimal and safe.
@@ -199,7 +193,6 @@ Load the relevant skill when the task domain matches — do not load all skills 
 
 | Skill | Trigger condition |
 |-------|------------------|
-| **perplexity** | Validating whether an approach is current best practice; comparing libraries; checking security advisories; any "is this still the way?" question before recommending a direction |
 | **frontend-ui** | Designing or reviewing UI components, chat interfaces, streaming UIs, or accessibility decisions |
 | **frontend-design** | Defining frontend visual direction, refining product aesthetics, or making a UI feel less generic and more cohesive |
 | **api-design** | Designing new endpoints, reviewing API contracts, choosing between REST/GraphQL/tRPC, standardizing error responses, versioning decisions |
@@ -207,13 +200,10 @@ Load the relevant skill when the task domain matches — do not load all skills 
 | **security** | Reviewing auth flows, handling user input, building public-facing endpoints, session management, anything crossing a trust boundary |
 | **webapp-testing** | Validating browser behavior in a local web app, writing Playwright-style acceptance checks, or debugging user-visible frontend flows |
 
-**Perplexity** answers "is this current?" and "what's the best approach today?" — use it before recommending an architectural direction you are not confident is still current.
-
 **Domain skills** (frontend-ui, frontend-design, api-design, database, security, webapp-testing) provide checklists and conventions for design, implementation, and validation decisions — use them when the lot involves that domain.
 
 When delegating to discovery-architect or Cody, note which skills are relevant
-to the lot so the receiving agent can load them. When a refined story exists,
-prefer handing that story to Cody and rely on its companion plan for execution detail.
+to the lot so the receiving agent can load them.
 
 ## Local customization
 

@@ -62,7 +62,7 @@ artifacts:
 
   templates:
     - path: templates/backlog/story.md
-      purpose: Story contract between discovery and delivery
+      purpose: Optional lightweight backlog tracking template
 
   examples:
     - path: examples/rules/
@@ -83,9 +83,6 @@ artifacts:
     - path: docs/customization.md
 
 skills:
-  - path: skills/perplexity/SKILL.md
-    installs_to: .agents/skills/perplexity/SKILL.md
-    purpose: Live web research via Perplexity CLI — validate best practices and current ecosystem state
   - path: skills/frontend-ui/SKILL.md
     installs_to: .agents/skills/frontend-ui/SKILL.md
     purpose: UI component patterns and chat/streaming interface design

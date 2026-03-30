@@ -35,15 +35,13 @@ development workflow.
 3. **Run `/plan {feature description}`**
     - Auto-routes to the discovery-architect agent
     - Discovery-architect uses scout sub-agents for research
-    - Produces a structured plan in `.opencode/plans/`
-    - Produces a refined backlog story in `.opencode/backlog/refined/`
-      that references the companion plan
+    - Produces a structured plan in `.opencode/plans/` with status,
+      lot boundary, risks, and implementation tasks
     - Returns a summary with task count, complexity, and risks
 
-4. **Review the artifacts**
-    - Approve them, or request adjustments
-    - The refined story is the durable backlog contract
-    - The plan carries the detailed execution steps
+4. **Review the plan**
+    - Approve it, or request adjustments
+    - The plan is the single execution artifact
 
 ---
 
@@ -53,11 +51,8 @@ development workflow.
    - The key WISC principle: implementation should not inherit
      the planning session's research noise
 
-2. **Run `/execute .opencode/backlog/refined/{story-id}-{name}.md`**
-   - Or pass the companion plan path directly if needed
+2. **Run `/execute .opencode/plans/{plan-name}.md`**
     - Auto-routes to Cody (delivery agent)
-    - Cody reads the story first when provided
-    - Cody uses the story to confirm lot boundary and locate the companion plan
     - Cody reads the entire plan before writing any code
     - Verifies the working tree is clean
     - Implements tasks in dependency order
@@ -65,13 +60,7 @@ development workflow.
     - Runs the full validation suite
     - Returns a structured completion report
 
-3. **Track backlog state during execution**
-   - Stories start in `.opencode/backlog/refined/`
-   - Active work moves to `active`
-   - Completed work ends in `done`
-   - Blocked work ends in `blocked`
-
-4. **Review the completion report**
+3. **Review the completion report**
     - Check validation results
     - Run any manual verification steps
 
@@ -122,6 +111,6 @@ This is the **Isolate** pillar in action.
 |--------|---------|-----------|
 | Orient | `/prime` | Scout |
 | Plan | `/plan {description}` | Discovery-architect |
-| Implement | `/execute {story-file or plan-file}` | Cody |
+| Implement | `/execute {plan-file}` | Cody |
 | Commit | `/commit` | Current agent |
 | Handoff | `/handoff` | Current agent |

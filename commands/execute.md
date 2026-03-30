@@ -1,35 +1,26 @@
 ---
-description: Execute a plan or refined story step by step
+description: Execute a plan step by step
 agent: cody
 ---
 
-# Execute: Implement a Plan or Refined Story
+# Execute: Implement a Plan
 
 ## Objective
 
-Read and execute every task described by: **$ARGUMENTS**
+Read and execute every task described in the plan at: **$ARGUMENTS**
 
-`$ARGUMENTS` may be either:
-- a plan file in `.opencode/plans/`, or
-- a refined story in `.opencode/backlog/refined/` that references its companion plan.
+`$ARGUMENTS` is a plan file in `.opencode/plans/`.
 
 Implement all tasks faithfully, following project conventions, and report results.
 
 ---
 
-## Step 1: Read the Entire Input Artifact
+## Step 1: Read the Entire Plan
 
-Read the input artifact at `$ARGUMENTS` from start to finish before writing a single
+Read the plan at `$ARGUMENTS` from start to finish before writing a single
 line of code.
 
-If `$ARGUMENTS` is a refined story:
-1. Read the full story first.
-2. Locate the companion plan reference inside the story.
-3. Read that full plan before making changes.
-4. If the story does not name a plan, or the reference is ambiguous, stop and
-   report the missing contract instead of guessing.
-
-Once the plan is identified, understand:
+Understand:
 
 - All tasks and their dependencies
 - Affected areas and files
@@ -78,8 +69,8 @@ If AGENTS.md specifies project conventions (import style, error handling,
 logging), follow them. If not, use standard practices for the project's
 language and framework.
 
-If execution started from a refined story, keep the story lot boundary as the
-scope guard. Do not broaden the work beyond the story and companion plan.
+Keep the plan's lot boundary as the scope guard. Do not broaden the work
+beyond what the plan specifies.
 
 ---
 

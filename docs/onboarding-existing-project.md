@@ -86,7 +86,7 @@ installation steps in `docs/installation.md`, then validate each agent:
    conventions, and does not touch unrelated files.
 
 4. **Discovery-architect fourth.** Give it a fuzzy problem. Verify it produces a
-   bounded plan plus a refined story for execution handoff, and escalates when
+   bounded plan with lot boundary and risks, and escalates when
    the problem is unclear rather than guessing.
 
 5. **QA specialist last.** Ask it to review a small recent change. Verify it returns
@@ -96,10 +96,10 @@ If any agent behaves unexpectedly, fix the prompts before moving to the next one
 
 ---
 
-## Phase 4 — Create the backlog infrastructure
+## Phase 4 — Create the project infrastructure
 
 This is the step most often skipped — and the one most likely to cause silent failure
-later. Without a physical backlog, the contract between discovery and delivery stays
+later. Without persistent artifacts, the contract between discovery and delivery stays
 verbal. Verbal contracts break across sessions.
 
 **What to create:**
@@ -107,26 +107,21 @@ verbal. Verbal contracts break across sessions.
 ```
 your-project/
 └── .opencode/
-    └── backlog/
-        ├── refined/       ← Stories ready for Cody, not yet started
-        ├── active/        ← Stories currently being worked on
-        ├── done/          ← Merged and closed stories (archive)
-        └── blocked/       ← Stories waiting on a dependency or decision
+    ├── plans/         ← Implementation plans from /plan
+    ├── handoffs/      ← Session handoff files
+    ├── rules/         ← On-demand zone rules (L2)
+    └── docs/          ← Reference docs with scout headers (L3)
 ```
 
 **How it works in practice:**
 
 1. Discovery session ends → discovery-architect writes a detailed plan to
-   `.opencode/plans/` and a refined story using the story template to
-   `.opencode/backlog/refined/`.
-2. The refined story references its companion plan path explicitly.
-3. Main agent hands off to Cody by pointing at the refined story (preferred) or
-   the plan directly when needed.
-4. During execution, the lot lifecycle is `refined` → `active` → `done` or
-   `blocked`, according to your repository workflow.
-5. After merge, main agent archives or moves the story into `.opencode/backlog/done/`.
+   `.opencode/plans/`.
+2. Main agent hands off to Cody by pointing at the plan.
+3. Cody implements the plan, validates, and produces a completion report.
+4. After merge, the plan serves as historical record of what was done and why.
 
-The story file survives session restarts. If the session is interrupted mid-delivery,
+The plan file survives session restarts. If the session is interrupted mid-delivery,
 the next session picks up from the file — not from a reconstructed verbal summary.
 
 ---
@@ -141,10 +136,8 @@ task that is small and low-risk: a documentation fix, a small refactor, a minor 
 1. Run `/prime` to verify the scout agent works and produces a useful summary.
 2. Describe the task to the main agent.
 3. Main agent delegates to discovery-architect.
-4. Discovery-architect produces a plan in `.opencode/plans/` and a refined story
-   in `.opencode/backlog/refined/`.
-5. Main agent delegates to Cody with the refined story as input, or the plan if
-   the story is not the best handoff artifact for that repo.
+4. Discovery-architect produces a plan in `.opencode/plans/`.
+5. Main agent delegates to Cody with the plan as input.
 6. Cody implements, produces a commit, returns a structured report.
 7. If risk warrants it, main agent delegates to QA specialist.
 8. Main agent synthesizes back to you: what changed, what risk remains, next step.
@@ -168,10 +161,10 @@ reference rather than creating a duplicate.
 Cody will invent plausible-sounding commands. It will be wrong. Always fill in
 the actual test commands.
 
-**Skipping the backlog folder.**
-Without it, stories are passed as inline prompt text. They disappear at session
-end. A blocked lot has no recovery point, and the story/plan pair loses its
-durable handoff path. The backlog folder is cheap to create and expensive to skip.
+**Skipping the plans folder.**
+Without it, plans are passed as inline prompt text. They disappear at session
+end. A blocked lot has no recovery point. The plans folder is cheap to create
+and expensive to skip.
 
 **No on-demand rules created.**
 Everything stays in AGENTS.md, which grows past 500 lines and becomes a

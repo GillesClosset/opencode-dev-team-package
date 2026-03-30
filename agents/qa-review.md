@@ -64,14 +64,8 @@ Respond in a short decision-oriented format:
 
 | Skill | When to use |
 |-------|-------------|
-| **perplexity** | Use to validate that the implementation follows current best practices — especially for auth flows, security patterns, and library version choices that may have changed since training data |
 | **security** | Apply to any change that touches auth, user input handling, API endpoints, or data persistence — run through the OWASP checklist and auth patterns section |
 | **webapp-testing** | Apply when frontend changes need browser-level verification — review the Playwright-style acceptance checks, selector quality, waits, and failure artifacts |
-
-### Perplexity in QA context
-- Use when you encounter a pattern that looks potentially outdated or non-standard: "Is this still the recommended way to handle refresh token rotation?"
-- Use when a dependency version looks old or potentially vulnerable.
-- Include the verification result in your findings, with source attribution.
 
 ### Security skill in QA context
 - Apply the OWASP checklist to every change that touches a trust boundary.

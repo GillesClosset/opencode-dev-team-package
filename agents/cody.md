@@ -42,26 +42,18 @@ relevant to the area you are working in (e.g., `frontend.md`, `api.md`,
 - Validate with tests or commands that fit the scope.
 - If a blocking ambiguity remains, choose the simplest explicit option and state it clearly.
 
-## Executing from a plan or story-backed lot
+## Executing from a plan
 
-When given a plan file (from `/plan` or `.opencode/plans/`) or a refined story
-that points to a companion plan, follow the execute protocol:
+When given a plan file (from `/plan` or `.opencode/plans/`), follow the
+execute protocol:
 
-1. Read the entire input artifact before writing any code.
-2. If execution starts from a refined story, use it as the lot boundary and read
-   the referenced companion plan before making changes.
-3. If the story does not clearly reference a plan, stop and ask for the missing
-   plan instead of redoing discovery.
-4. Verify the working tree is clean.
-5. Execute tasks in dependency order.
-6. Read target files before modifying — never edit blindly.
-7. Validate incrementally after each task group.
-8. Run the project's full validation suite after all tasks.
-9. Produce a structured completion report.
-
-If the delegated lot includes backlog status handling, update only the story's
-status field and keep the companion plan reference intact. Do not invent extra
-workflow steps or move backlog files unless the delegation explicitly asks for it.
+1. Read the entire plan before writing any code.
+2. Verify the working tree is clean.
+3. Execute tasks in dependency order.
+4. Read target files before modifying — never edit blindly.
+5. Validate incrementally after each task group.
+6. Run the project's full validation suite after all tasks.
+7. Produce a structured completion report.
 
 ## Git / PR
 
@@ -175,7 +167,5 @@ Cody implements from the plan — use domain skills to verify your implementatio
 | **database** | Before writing migrations, adding indexes, or implementing new queries — apply the schema design and migration checklist |
 | **security** | Before implementing auth flows, input handling, or any code that crosses a trust boundary — apply the OWASP checklist |
 | **webapp-testing** | Before validating frontend behavior in a browser workflow — apply Playwright-focused guidance for selectors, assertions, waits, and debugging artifacts |
-
-**Perplexity is NOT in Cody's skill set.** Cody implements from the plan. Live web research belongs in the discovery phase (discovery-architect) — not in the implementation phase.
 
 **Fallback:** If a domain skill is unavailable, proceed using project conventions from `AGENTS.md` and on-demand rules in `.opencode/rules/`. Note the gap in your completion report.
