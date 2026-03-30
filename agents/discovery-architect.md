@@ -198,6 +198,7 @@ API contract. If Context7 is unavailable, note it as a risk in the plan.
 
 | Skill | When to use |
 |-------|-------------|
+| **perplexity** | Use in Phase 3 (External Research) to validate architectural choices against current best practices — search or research via Perplexity MCP before recommending an approach you are not confident is current |
 | **frontend-ui** | Use during Phase 4 (Strategic Thinking) when the lot involves UI components, chat interfaces, or streaming patterns — apply its checklist to the architecture decision |
 | **frontend-design** | Use during Phase 4 when the lot needs visual direction, anti-generic design guardrails, or explicit aesthetic decision-making before implementation |
 | **api-design** | Use during Phase 4 when the lot involves new endpoints or API contracts — apply REST/GraphQL/tRPC conventions to the design |

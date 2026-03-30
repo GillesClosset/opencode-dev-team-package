@@ -195,7 +195,7 @@ Skills install to:
 
 The package ships them under `skills/{name}/SKILL.md`.
 
-Current bundled catalog: 6 skills — `frontend-ui`, `frontend-design`, `api-design`, `database`, `security`, and `webapp-testing`.
+Current bundled catalog: 7 skills — `perplexity`, `frontend-ui`, `frontend-design`, `api-design`, `database`, `security`, and `webapp-testing`.
 
 ### SKILL.md format
 

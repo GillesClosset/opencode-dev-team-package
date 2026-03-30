@@ -39,7 +39,8 @@ Install skills into the current project only:
 ```bash
 mkdir -p .agents/skills
 
-# Install all 6 skills
+# Install all 7 skills
+cp -r /path/to/wisc-opencode/skills/perplexity/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-ui/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-design/ .agents/skills/
 cp -r /path/to/wisc-opencode/skills/api-design/ .agents/skills/
@@ -59,6 +60,7 @@ Install skills for all projects on this machine:
 ```bash
 mkdir -p ~/.agents/skills
 
+cp -r /path/to/wisc-opencode/skills/perplexity/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-ui/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/frontend-design/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/api-design/ ~/.agents/skills/
@@ -67,7 +69,7 @@ cp -r /path/to/wisc-opencode/skills/security/ ~/.agents/skills/
 cp -r /path/to/wisc-opencode/skills/webapp-testing/ ~/.agents/skills/
 ```
 
-All 6 skills provide reference checklists and conventions loaded directly into agent context. `webapp-testing` assumes the target project already has a local Playwright/browser setup when you want to run browser checks, but the skill itself ships only as guidance.
+All 7 skills provide reference checklists and conventions loaded directly into agent context. `webapp-testing` assumes the target project already has a local Playwright/browser setup when you want to run browser checks, but the skill itself ships only as guidance. `perplexity` requires the Perplexity MCP server to be configured (see below).
 
 ## Write Your AGENTS.md
 
@@ -198,3 +200,49 @@ MCP tool availability.
 | Scout researching an unfamiliar library | `ctx7 get <library>` in a bash step |
 | Discovery-architect Phase 3 external research | Context7 MCP or `ctx7 get` |
 | Any version-sensitive API or SDK usage | Look up before writing, not after |
+
+## Optional: Web Research (Perplexity MCP)
+
+Perplexity gives agents access to **live web search and deep research** during
+discovery and planning. Context7 answers "how does this API work?" — Perplexity
+answers "is this still the recommended approach?" and "what are the current
+alternatives?".
+
+### MCP server setup
+
+Add to `~/.config/opencode/opencode.json` under the `"mcp"` key:
+
+```json
+"perplexity": {
+  "type": "local",
+  "command": ["npx", "-y", "@anthropic/perplexityai-modelcontextprotocol"],
+  "environment": {
+    "PERPLEXITY_API_KEY": "<your-perplexity-api-key>"
+  },
+  "enabled": true
+}
+```
+
+Get an API key at [perplexity.ai](https://www.perplexity.ai/settings/api).
+
+### What it provides
+
+The Perplexity MCP server exposes four tools:
+
+| Tool | Use when |
+|------|----------|
+| `perplexity_search` | Quick factual lookups — current versions, deprecation status |
+| `perplexity_chat` | Conversational queries — tradeoffs, recommendations |
+| `perplexity_research` | Deep analysis — comprehensive comparisons, market research |
+| `perplexity_reason` | Analytical reasoning — cost modeling, decision matrices |
+
+### When to use Perplexity vs Context7
+
+| Question type | Use |
+|---------------|-----|
+| "What is the current API for library X?" | Context7 |
+| "Is library X still the recommended choice for this use case?" | Perplexity |
+| "What version should I pin in package.json?" | Context7 |
+| "Has the ecosystem shifted away from this approach?" | Perplexity |
+| "How do I call method Y on the Z SDK?" | Context7 |
+| "What are the security implications of approach A vs B?" | Perplexity |

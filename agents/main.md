@@ -193,6 +193,7 @@ Load the relevant skill when the task domain matches — do not load all skills 
 
 | Skill | Trigger condition |
 |-------|------------------|
+| **perplexity** | Validating whether an approach is current best practice; comparing libraries or frameworks; checking dependency versions or security advisories; any "is this still the way?" question before recommending a direction |
 | **frontend-ui** | Designing or reviewing UI components, chat interfaces, streaming UIs, or accessibility decisions |
 | **frontend-design** | Defining frontend visual direction, refining product aesthetics, or making a UI feel less generic and more cohesive |
 | **api-design** | Designing new endpoints, reviewing API contracts, choosing between REST/GraphQL/tRPC, standardizing error responses, versioning decisions |
@@ -201,6 +202,8 @@ Load the relevant skill when the task domain matches — do not load all skills 
 | **webapp-testing** | Validating browser behavior in a local web app, writing Playwright-style acceptance checks, or debugging user-visible frontend flows |
 
 **Domain skills** (frontend-ui, frontend-design, api-design, database, security, webapp-testing) provide checklists and conventions for design, implementation, and validation decisions — use them when the lot involves that domain.
+
+**Perplexity** answers "is this current?" and "what's the best approach today?" — use it before recommending an architectural direction you are not confident is still current. It requires the Perplexity MCP server to be configured.
 
 When delegating to discovery-architect or Cody, note which skills are relevant
 to the lot so the receiving agent can load them.

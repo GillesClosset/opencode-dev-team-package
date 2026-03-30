@@ -83,6 +83,9 @@ artifacts:
     - path: docs/customization.md
 
 skills:
+  - path: skills/perplexity/SKILL.md
+    installs_to: .agents/skills/perplexity/SKILL.md
+    purpose: Web research via Perplexity MCP — validate best practices, check versions, compare technologies
   - path: skills/frontend-ui/SKILL.md
     installs_to: .agents/skills/frontend-ui/SKILL.md
     purpose: UI component patterns and chat/streaming interface design

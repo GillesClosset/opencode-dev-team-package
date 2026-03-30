@@ -24,7 +24,7 @@ under 100 lines. Commits capture WHY, not just what.
 wisc-opencode/
 ├── commands/           # 5 slash commands — the WISC engine
 ├── agents/             # 5 agents (1 orchestrator + 4 specialists)
-├── skills/             # 6 agent skills (frontend-ui, frontend-design, api-design, database, security, webapp-testing)
+├── skills/             # 7 agent skills (perplexity, frontend-ui, frontend-design, api-design, database, security, webapp-testing)
 ├── scaffold/           # Directory templates for .opencode/
 ├── examples/           # Example rules, docs, prime commands, AGENTS.md
 ├── docs/               # Framework documentation
@@ -103,10 +103,11 @@ See [docs/customization.md](docs/customization.md) for details.
 
 Skills give agents specialized domain knowledge and live research capabilities.
 Each skill is a `SKILL.md` file loaded on-demand when the task matches the skill's trigger condition.
-This package currently ships **6 skills**.
+This package currently ships **7 skills**.
 
 | Skill | Description | Assigned to |
 |-------|-------------|-------------|
+| **perplexity** | Web research via Perplexity MCP — validate best practices, check versions, compare technologies | main, discovery-architect |
 | **frontend-ui** | UI component patterns, chat/streaming interfaces, accessibility checklists | main, discovery-architect, cody |
 | **frontend-design** | Frontend visual direction, typography, color/motion cohesion, anti-generic design guardrails | main, discovery-architect, cody |
 | **api-design** | REST, GraphQL, and tRPC conventions, error formats, versioning | main, discovery-architect, cody |
@@ -122,7 +123,7 @@ cp -r /path/to/wisc-opencode/skills/database/ .agents/skills/
 # etc. — install only what your project needs
 ```
 
-See [docs/installation.md](docs/installation.md#install-skills) for full install instructions.
+See [docs/installation.md](docs/installation.md#install-skills) for full install instructions and Perplexity MCP setup.
 See [docs/customization.md](docs/customization.md#creating-new-skills) for how to create your own skills.
 
 ## Documentation
